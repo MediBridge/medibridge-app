@@ -18,12 +18,18 @@ import PatientLayout from "./pages/PatientDashboard/PatientLayout";
 import About from './pages/About';
 import Contact from "./pages/Contact";
 import PatientDashboard from './pages/PatientDashboard/PatientDashboard';
-const CONTRACT_ADDRESS = process.env.CONTRACT_NAME || "dev-1688297327576-65746263435730";
+const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
 console.log(CONTRACT_ADDRESS);
 
 // When creating the wallet you can optionally ask to create an access key
 // Having the key enables to call non-payable methods without interrupting the user to sign
-const wallet = new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS });
+var wallet
+try {
+ wallet = new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS });
+ 
+} catch (error) {
+  console.log(error);
+}
 
 
 const container = document.getElementById('root');

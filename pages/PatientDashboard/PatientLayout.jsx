@@ -9,9 +9,10 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
     console.log("Checking the Patients status");
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
-      const messages = await wallet.viewMethod({ contractId: contractId, method: "get_patient", args: { id: wallet.accountId }});
+      console.log(wallet);
+      const messages = await wallet.viewMethod({ contractId: contractId, method: "get_patient"});
       console.log((messages) );
-      setisaPatient(true);
+      setisaPatient(true);  
       return messages;
     } catch (error) {
       console.log(error);
@@ -29,7 +30,7 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
       <nav className="fade-in">
         <ul className="navigation-bar">
           <li>
-            <Link to="logout.html"><SignOutButton accountId={wallet.accountId} onClick={() => wallet.signOut()}/></Link>
+            <Link to="/"><SignOutButton accountId={wallet.accountId} onClick={() => wallet.signOut()}/></Link>
           </li>
           <li>
             <Link to="patients.html">Patients</Link>
