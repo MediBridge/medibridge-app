@@ -1,0 +1,163 @@
+.navbar {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  right: 5;
+  width: 100%;
+  z-index: 1000;
+}
+.navbar-brand {
+  font-size: 17px;
+  font-weight: bold;
+  color: #091133;
+  text-decoration: none;
+}
+
+/* PatientProfile.css */
+
+/* Container for the entire patient profile */
+/* PatientProfile.css */
+
+/* Container for the entire patient profile */
+.patient-profile {
+  display: flex;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Styles for the right section (patient-info) */
+.right-section {
+  width: 30%;
+  align-self: flex-start;
+  margin-right: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit button style */
+.edit-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #ffd166;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #e9c00d;
+}
+
+/* Styles for the left section (tabs and tab content) */
+.tabs {
+  width: 50%;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background-color: #e7ecff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.tab-button:hover {
+  background-color: #d1d6ff;
+}
+
+.tab-button.active {
+  background-color: #ffd166;
+  border-color: #e9c00d;
+  color: black;
+}
+
+.tab-content {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Rest of your existing CSS... */
+
+/* Rest of your existing CSS... */
+
+.record-item,
+.allergy-item,
+.immunization-item,
+.procedure-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+/* AllergiesTab.css */
+
+.allergy-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+.record-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+.tab-content .record-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.record-table th,
+.record-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.record-table th {
+  background-color: #f3f3f3;
+  font-weight: bold;
+  text-align: left;
+}
+
+.record-table td {
+  text-align: left;
+}
+
+.record-row:hover {
+  background-color: #ffd166;
+  cursor: pointer;
+}
+
+.footer {
+  background-color: #e7ecff;
+  padding: 20px;
+  color: #091133;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

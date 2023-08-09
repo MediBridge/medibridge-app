@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../assets/css/AddNewPatient.css"; // Import your CSS file for styling
 
-const Feautures = () => {
+const AddNewPatient = () => {
     const [fullName, setFullName] = useState("");
     const [birthday, setBirthday] = useState("");
     const [gender, setGender] = useState("Male");
@@ -90,4 +90,4 @@ const Feautures = () => {
   );
 };
 
-export default Feautures;
+export default AddNewPatient;

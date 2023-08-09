@@ -19,6 +19,7 @@ import PatientLayout from "./pages/PatientDashboard/PatientLayout";
 import About from './pages/About';
 import Contact from "./pages/Contact";
 import PatientDashboard from './pages/PatientDashboard/PatientDashboard';
+import PatientProfile from './pages/PatientDashboard/PatientProfile';
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
 console.log(CONTRACT_ADDRESS);
 
@@ -54,8 +55,12 @@ window.onload = async () => {
       element: <Contact />,
     },
     {
-      path: "/addnewpatient",
+      path: "/addnewPatient",
       element: <AddNewPatient />,
+    },
+    {
+      path: "/patientprofile",
+      element: <PatientProfile />,
     },
     {
       path: "/doctor",
