@@ -11,6 +11,7 @@ import { createRoot } from 'react-dom/client';
 // NEAR
 import { Wallet } from './near-wallet';
 import LandingPage from './pages/LandingPage';
+import AddNewPatient from './pages/AddNewPatient';
 import DoctorLayout from './pages/DoctorDashboard/DoctorLayout';
 import DoctorDashboard from './pages/DoctorDashboard/DoctorDashboard';
 import PatientRecord from './pages/DoctorDashboard/PatientRecord';
@@ -51,6 +52,10 @@ window.onload = async () => {
     {
       path: "/contact",
       element: <Contact />,
+    },
+    {
+      path: "/addnewpatient",
+      element: <AddNewPatient />,
     },
     {
       path: "/doctor",
