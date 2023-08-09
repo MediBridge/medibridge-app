@@ -27,7 +27,7 @@ header {
   display: inline-block;
   margin: 5px;
   padding: 10px 20px;
-  background-color: #8B4513;
+  background-color: #111B47;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -74,62 +74,38 @@ header {
 
 
 /* Featured services section styles */
-.accordion {
-  width: 100%;
-  max-width: 1080px;
-  margin: 50px auto;
-}
 
-.accordion ul {
-  list-style: none;
-  padding: 0;
-}
-
-.accordion li {
-  margin-bottom: 20px;
-}
-
-.accordion div {
+.features-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  gap: 100px; /* Add spacing between feature sections */
+  margin: 40px 0; /* Add margin to create separation from other content */
+}
+
+.feature {
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 15px;
-  background-color: #f7f7f7;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  height: 200px; /* Adjust the height as needed */
 }
 
-.accordion div:hover {
-  background-color: #93ceac;
+.feature-content {
+  width: 40%;
+  padding: 20px;
+  margin-left: 200px;
 }
 
-.accordion img {
-  max-width: 50%;
-  height: 100px;
-  margin-bottom: 15px;
+.feature-image {
+  flex: 1;
+  display: flex;
+  margin-left: 70px;
 }
 
-.accordion h2 {
-  margin: 0;
-  font-size: 26px;
+.feature-image img {
+  max-width: 60%;
+  height: auto;
 }
 
-.accordion p {
-  margin: 10px 0 0;
-  font-size: 19px;
-}
-
-.accordion div .service-content {
-  display: none;
-}
-
-.accordion div.show .service-content {
-  display: block;
-}
 /*DOCTORS PAGE________________________________________________*/
 
 .appointment-card {
@@ -402,8 +378,8 @@ section.search-patients {
 
 /* Footer styles ________________________________________________*/
 footer {
-  background-color: #333;
-  color: #fff;
+  background-color: #e7ecff;
+  color: #110239;
   padding: 20px;
   text-align: center;
   position: fixed;
@@ -424,7 +400,7 @@ footer {
 }
 
 .footer-links a {
-  color: #fff;
+  color: #111B47;
   text-decoration: none;
 }
 
