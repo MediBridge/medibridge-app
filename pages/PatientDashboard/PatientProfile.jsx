@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import the Link component
 import RecordsTab from "./RecordsTab";
 import AllergiesTab from "./AllergiesTab";
 import ImmunizationsTab from "./ImmunizationsTab";
@@ -44,9 +45,11 @@ const PatientProfile = ({ patientInfo }) => {
 
     return (
     <div>
-        <nav className="navbar">
-        <div className="navbar-brand">Home</div>
-        </nav>
+        <ul className="navigation-bar">
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
+        </ul>
         {/* Patient Information */}
         <div className="patient-profile">
         <div className="right-section">

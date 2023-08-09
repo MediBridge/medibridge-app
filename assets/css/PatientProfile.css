@@ -1,24 +1,31 @@
-.navbar {
-  padding: 10px 20px;
+.navigation-bar {
   display: flex;
-  justify-content: flex-end;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  right: 5;
-  width: 100%;
-  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ccc;
 }
-.navbar-brand {
-  font-size: 17px;
-  font-weight: bold;
-  color: #091133;
+
+.navigation-bar li {
+  margin: 0 10px;
+}
+
+.navigation-bar a {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #333;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-/* PatientProfile.css */
+.navigation-bar a:hover {
+  color: #220d5b;
+}
 
-/* Container for the entire patient profile */
+
 /* PatientProfile.css */
 
 /* Container for the entire patient profile */
