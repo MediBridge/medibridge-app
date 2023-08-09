@@ -30,6 +30,7 @@ const PatientOnBoarding = ({ isSignedIn, contractId, wallet }) => {
   const addPatient = async (e) => {
     e.preventDefault();
     try {
+      console.log(wallet);
       wallet
         .callMethod({
           method: "add_patient",
@@ -39,6 +40,7 @@ const PatientOnBoarding = ({ isSignedIn, contractId, wallet }) => {
             gender,
             blood_type: bloodType,
           },
+          contractId,
         })
         .then(async () => {
           console.log("Added the Patient to our list");
@@ -47,7 +49,7 @@ const PatientOnBoarding = ({ isSignedIn, contractId, wallet }) => {
           });
         });
     } catch (error) {
-      console.log("Error while Registering Patient",error);
+      console.log("Error while Registering Patient", error);
       toast("Failed to Register Patient", {
         toastId: "failureToRegister",
       });

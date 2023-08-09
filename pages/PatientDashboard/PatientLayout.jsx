@@ -2,26 +2,31 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
 import PatientOnBoarding from "./PatientOnBoarding";
-const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
+const DoctorLayout = ({ isSignedIn, contractId, wallet,isAPatient}) => {
   console.log(isSignedIn);
   const [isaPatient, setisaPatient] = useState(false);
+
+
+
   const checkPatientStatus = async () =>{
     console.log("Checking the Patients status");
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
       console.log(wallet);
-      const messages = await wallet.viewMethod({ contractId: contractId, method: "get_patient"});
-      console.log((messages) );
-      setisaPatient(true);  
-      return messages;
+      const messages = await wallet.callMethod({ contractId: contractId, method: "get_patient"});
+      console.log((messages));
+      setisaPatient(true);
+      isAPatient = true;
     } catch (error) {
       console.log(error);
       setisaPatient(false);
+      isAPatient = true;
+
     }
     
   }
   useEffect(() => {
-    if(isSignedIn)
+    if(isSignedIn && !isAPatient)
     checkPatientStatus();
   }, [])
 

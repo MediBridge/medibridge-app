@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {
@@ -27,19 +27,17 @@ console.log(CONTRACT_ADDRESS);
 // Having the key enables to call non-payable methods without interrupting the user to sign
 var wallet
 try {
- wallet = new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS });
+ wallet = new Wallet({ createAccessKeyFor: "testing1111.testnet" });
  
 } catch (error) {
   console.log(error);
 }
-
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 // Setup on page load
 window.onload = async () => {
   const isSignedIn = await wallet.startUp();
-
+  const isAPatient = false;
   const router = createHashRouter([
     {
       path: "/",
@@ -78,7 +76,7 @@ window.onload = async () => {
     },
     {
       path: "/patient",
-      element: <PatientLayout isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
+      element: <PatientLayout isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet} isAPatient={isAPatient} />,
       children:[
         {
           path: "dashboard",
