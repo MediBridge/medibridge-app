@@ -13,7 +13,7 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet,isAPatient}) => {
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
       console.log(wallet);
-      const messages = await wallet.callMethod({ contractId: contractId, method: "get_patient"});
+      const messages = await wallet.viewMethod({ contractId: contractId, method: "get_patient"});
       console.log((messages));
       setisaPatient(true);
       isAPatient = true;
