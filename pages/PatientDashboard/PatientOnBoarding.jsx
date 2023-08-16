@@ -11,7 +11,7 @@ const PatientOnBoarding = ({ isSignedIn, contractId, wallet }) => {
   const [bloodType, setbloodType] = useState("O+");
   const [loading, setloading] = useState(false);
   const onBoardPatient = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     try {
       wallet
         .callMethod({

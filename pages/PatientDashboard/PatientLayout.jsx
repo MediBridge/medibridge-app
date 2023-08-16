@@ -2,40 +2,51 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
 import PatientOnBoarding from "./PatientOnBoarding";
-const DoctorLayout = ({ isSignedIn, contractId, wallet,isAPatient}) => {
+const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
   console.log(isSignedIn);
-  const [isaPatient, setisaPatient] = useState(false);
-
-
-
-  const checkPatientStatus = async () =>{
+  const [isaPatient, setisaPatient] = useState(true);
+  const localStorageData = localStorage.getItem("userinfo");
+  const checkPatientStatus = async () => {
     console.log("Checking the Patients status");
+    console.log(localStorageData);
+  
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
       console.log(wallet);
-      const messages = await wallet.viewMethod({ contractId: contractId, method: "get_patient"});
-      console.log((messages));
-      setisaPatient(true);
-      isAPatient = true;
+      if (localStorage.getItem("userinfo")) {
+        console.log("No information found");
+        setisaPatient(true);
+        isAPatient = true;
+        console.log(JSON.parse(localStorageData));
+        return;
+      }
+      const messages = await wallet.callMethod({
+        contractId: contractId,
+        method: "get_patient",
+      });
+      localStorage.setItem("userinfo", JSON.stringify(messages));
+      console.log(messages);
     } catch (error) {
       console.log(error);
-      setisaPatient(false);
-      isAPatient = true;
-
+     
     }
-    
-  }
-  useEffect(() => {
-    if(isSignedIn && !isAPatient)
-    checkPatientStatus();
-  }, [])
+  };
+  // useEffect(() => {
+  //   if (isSignedIn && !isAPatient) checkPatientStatus();
+  // }, []);
 
   return (
     <div>
       <nav className="fade-in">
         <ul className="navigation-bar">
           <li>
-            <Link to="/"><SignOutButton accountId={wallet.accountId} onClick={() => wallet.signOut()}/></Link>
+            <Link to="/">
+              <button onClick={checkPatientStatus}>Get details</button>
+              <SignOutButton
+                accountId={wallet.accountId}
+                onClick={() => wallet.signOut()}
+              />
+            </Link>
           </li>
           <li>
             <Link to="patients.html">Patients</Link>
@@ -45,11 +56,18 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet,isAPatient}) => {
           </li>
         </ul>
       </nav>
- 
-      {!isSignedIn ?  <SignInPrompt  onClick={() => wallet.signIn()}/> :
-      isaPatient?<Outlet />: <PatientOnBoarding isSignedIn={isSignedIn} contractId={contractId} wallet={wallet} />
-      
-    }
+
+      {!isSignedIn ? (
+        <SignInPrompt onClick={() => wallet.signIn()} />
+      ) : isaPatient ? (
+        <Outlet />
+      ) : (
+        <PatientOnBoarding
+          isSignedIn={isSignedIn}
+          contractId={contractId}
+          wallet={wallet}
+        />
+      )}
       <footer className="fade-in">
         <ul className="footer-links">
           <li>
