@@ -2,38 +2,63 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
 import PatientOnBoarding from "./PatientOnBoarding";
+import AddNewPatient from "../AddNewPatient";
 const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
   console.log(isSignedIn);
-  const [isaPatient, setisaPatient] = useState(true);
+  const [isaPatient, setisaPatient] = useState(false);
   const localStorageData = localStorage.getItem("userinfo");
+  console.log(localStorage);
+
   const checkPatientStatus = async () => {
     console.log("Checking the Patients status");
-    console.log(localStorageData);
+    console.log("This is storage data",localStorageData);
   
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
       console.log(wallet);
-      if (localStorage.getItem("userinfo")) {
-        console.log("No information found");
+      if (localStorageData) {
         setisaPatient(true);
         isAPatient = true;
+        //DEBUGING TO CHECK WHAT DATA IS STORED
         console.log(JSON.parse(localStorageData));
         return;
       }
-      const messages = await wallet.callMethod({
-        contractId: contractId,
-        method: "get_patient",
-      });
-      localStorage.setItem("userinfo", JSON.stringify(messages));
-      console.log(messages);
+      else{
+        console.log("Now calling wallet");
+        // wallet.callMethod({
+        //   contractId: contractId,
+        //   method: "get_patient",
+        // })
+        // .then(async (result) => {
+        // console.log(result);
+        // localStorage.setItem("userinfo", JSON.stringify(result));
+        // });
+        wallet.viewMethod({
+            contractId: contractId,
+            method: "get_patient_workaround",
+            args:{
+                account_id:await wallet.getAccountId()
+            }
+          })
+          .then(async (result) => {
+          console.log(result);
+          })
+          .catch(error=>{
+            console.log(error);
+          });
+      }
+     
     } catch (error) {
       console.log(error);
      
     }
   };
-  // useEffect(() => {
-  //   if (isSignedIn && !isAPatient) checkPatientStatus();
-  // }, []);
+
+ 
+  
+  useEffect(() => {
+    if (isSignedIn && !isAPatient) checkPatientStatus();
+  }, []);
 
   return (
     <div>
@@ -41,7 +66,6 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
         <ul className="navigation-bar">
           <li>
             <Link to="/">
-              <button onClick={checkPatientStatus}>Get details</button>
               <SignOutButton
                 accountId={wallet.accountId}
                 onClick={() => wallet.signOut()}
@@ -62,7 +86,7 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
       ) : isaPatient ? (
         <Outlet />
       ) : (
-        <PatientOnBoarding
+        <AddNewPatient
           isSignedIn={isSignedIn}
           contractId={contractId}
           wallet={wallet}

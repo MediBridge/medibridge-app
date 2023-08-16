@@ -48,9 +48,7 @@ const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
 
     return (
     <div>
-        <nav className="navbar">
-        <div className="navbar-brand">Home</div>
-        </nav>
+        
         <div className="center-container">
         <div className="add-patient-container">
             <h1 className="add-patient-title">Add New Patient</h1>
