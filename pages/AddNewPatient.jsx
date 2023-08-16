@@ -1,15 +1,44 @@
 import React, { useState } from "react";
 import "../assets/css/AddNewPatient.css"; // Import your CSS file for styling
+import { ToastContainer, toast } from "react-toastify";
 
-const AddNewPatient = () => {
+const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
     const [fullName, setFullName] = useState("");
     const [birthday, setBirthday] = useState("");
     const [gender, setGender] = useState("Male");
     const [bloodType, setBloodType] = useState("");
     const [photo, setPhoto] = useState(null); // State for the uploaded photo
 
-    const handleAddPatient = () => {
-        // Prakhar Implement your logic to add patient here
+
+    
+    //LOGIC TO ADD A PATIENT TO THE CONTRACT
+    const handleAddPatient = (e) => {
+        e.preventDefault();
+        try {
+          console.log(wallet);
+          wallet
+            .callMethod({
+              method: "add_patient",
+              args: {
+                full_name: fullName,
+                birthday: birthday,
+                gender,
+                blood_type: bloodType,
+              },
+              contractId,
+            })
+            .then(async () => {
+              console.log("Added the Patient to our list");
+              toast("Registered Patient", {
+                toastId: "registeredPatient",
+              });
+            });
+        } catch (error) {
+          console.log("Error while Registering Patient", error);
+          toast("Failed to Register Patient", {
+            toastId: "failureToRegister",
+          });
+        }
     };
 
     const handlePhotoUpload = (e) => {
@@ -25,25 +54,25 @@ const AddNewPatient = () => {
         <div className="center-container">
         <div className="add-patient-container">
             <h1 className="add-patient-title">Add New Patient</h1>
-            <div className="photo-container">
-            {photo ? (
+            {/* <div className="photo-container"> */}
+            {/* {photo ? (
                 <img
                 src={URL.createObjectURL(photo)}
                 alt="Patient"
                 className="uploaded-photo"
                 />
-            ) : (
-                <div className="default-photo">
+            ) : ( */}
+                {/* <div className="default-photo"> */}
                 {/* Placeholder image or default SVG */}
-                <img
+                {/* <img
                     src="placeholder-image.png"
                     alt="Default"
                     className="default-image"
                 />
                 </div>
-            )}
-            <input type="file" accept="image/*" onChange={handlePhotoUpload} />
-            </div>
+            )} */}
+            {/* <input type="file" accept="image/*" onChange={handlePhotoUpload} /> */}
+            {/* </div> */}
             <div className="input-container">
             <label>Full Name:</label>
             <input

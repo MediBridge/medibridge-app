@@ -54,7 +54,7 @@ window.onload = async () => {
     },
     {
       path: "/addnewPatient",
-      element: <AddNewPatient />,
+      element: <AddNewPatient isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
     },
     {
       path: "/patientprofile",
@@ -74,20 +74,21 @@ window.onload = async () => {
         },
       ]
     },
-    {
-      path: "/patient",
-      element: <PatientLayout isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet} isAPatient={isAPatient} />,
-      children:[
-        {
-          path: "dashboard",
-          element: <PatientDashboard  isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
-        },
-        // {
-        //   path: "patientrecord/:patientid",
-        //   element: <PatientRecord  isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
-        // },
-      ]
-    },
+    // },
+    // {
+    //   path: "/patient",
+    //   element: <PatientLayout isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet} isAPatient={isAPatient} />,
+    //   children:[
+    //     {
+    //       path: "dashboard",
+    //       element: <PatientDashboard  isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
+    //     },
+    //     // {
+    //     //   path: "patientrecord/:patientid",
+    //     //   element: <PatientRecord  isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
+    //     // },
+    //   ]
+    // },
     {
       path: "/app",
       element: <App isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet} />,
