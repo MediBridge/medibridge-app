@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
-import PatientOnBoarding from "./PatientOnBoarding";
 import AddNewPatient from "../AddNewPatient";
 const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   console.log(isSignedIn);

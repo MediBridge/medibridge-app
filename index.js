@@ -11,14 +11,12 @@ import { createRoot } from 'react-dom/client';
 // NEAR
 import { Wallet } from './near-wallet';
 import LandingPage from './pages/LandingPage';
-import AddNewPatient from './pages/AddNewPatient';
 import DoctorLayout from './pages/DoctorDashboard/DoctorLayout';
 import DoctorDashboard from './pages/DoctorDashboard/DoctorDashboard';
 import PatientRecord from './pages/DoctorDashboard/PatientRecord';
 import PatientLayout from "./pages/PatientDashboard/PatientLayout";
 import About from './pages/About';
 import Contact from "./pages/Contact";
-import PatientDashboard from './pages/PatientDashboard/PatientDashboard';
 import PatientProfile from './pages/PatientDashboard/PatientProfile';
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
 console.log(CONTRACT_ADDRESS);
@@ -51,10 +49,6 @@ window.onload = async () => {
     {
       path: "/contact",
       element: <Contact />,
-    },
-    {
-      path: "/addnewPatient",
-      element: <AddNewPatient isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
     },
     {
       path: "/doctor",
