@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
 import PatientOnBoarding from "./PatientOnBoarding";
 import AddNewPatient from "../AddNewPatient";
-const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
+const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   console.log(isSignedIn);
   const [isaPatient, setisaPatient] = useState(false);
   const localStorageData = localStorage.getItem("userinfo");
@@ -18,7 +18,6 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
       console.log(wallet);
       if (localStorageData) {
         setisaPatient(true);
-        isAPatient = true;
         //DEBUGING TO CHECK WHAT DATA IS STORED
         console.log(JSON.parse(localStorageData));
         return;
@@ -42,6 +41,7 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
           })
           .then(async (result) => {
           console.log(result);
+          setisaPatient(true);
           })
           .catch(error=>{
             console.log(error);
@@ -57,7 +57,7 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet, isAPatient }) => {
  
   
   useEffect(() => {
-    if (isSignedIn && !isAPatient) checkPatientStatus();
+    if (isSignedIn && !isaPatient) checkPatientStatus();
   }, []);
 
   return (

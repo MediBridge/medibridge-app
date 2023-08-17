@@ -57,10 +57,6 @@ window.onload = async () => {
       element: <AddNewPatient isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
     },
     {
-      path: "/patientprofile",
-      element: <PatientProfile />,
-    },
-    {
       path: "/doctor",
       element: <DoctorLayout isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
       children:[
@@ -80,7 +76,7 @@ window.onload = async () => {
       children:[
         {
           path: "dashboard",
-          element: <PatientDashboard  isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
+          element: <PatientProfile  isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
         },
         // {
         //   path: "patientrecord/:patientid",
