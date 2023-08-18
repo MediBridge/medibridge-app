@@ -10,7 +10,6 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
 
   const checkPatientStatus = async () => {
     console.log("Checking the Patients status");
-    console.log("This is storage data",localStorageData);
   
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
@@ -43,11 +42,14 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
           setisaPatient(true);
           })
           .catch(error=>{
+      setisaPatient(false);
+
             console.log(error);
           });
       }
      
     } catch (error) {
+      setisaPatient(false);
       console.log(error);
      
     }
