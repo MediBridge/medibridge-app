@@ -1,12 +1,21 @@
 import React from 'react'
+import "./Loading.css"; // Import the CSS
 
 const Loading = () => {
   return (
-    <div>
-      <img src={"https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif"} />
-      Loading
-      </div>
-  )
+    <div className="center">
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+      <div className="wave"></div>
+  </div>
+  );
 }
 
 export default Loading

@@ -5,6 +5,7 @@ import AllergiesTab from "./AllergiesTab";
 import ImmunizationsTab from "./ImmunizationsTab";
 import ProceduresTab from "./ProceduresTab";
 import "../../assets/css/PatientProfile.css";
+import Loading from "../../components/Loading";
 
 const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
   // State to track the active tab
@@ -30,49 +31,54 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
     procedures: [],
   });
   const [isaPatient, setisaPatient] = useState(false);
+  const [loading, setLoading] = useState(false); // Declare the loading state here
   const localStorageData = localStorage.getItem("userinfo");
 
   //GET DETAILS OF THE PATIENT
   const checkPatientStatus = async () => {
+    setLoading(true);
     console.log("Checking the Patients status");
 
     try {
+          await new Promise((resolve) => setTimeout(resolve, 2000));
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
-      console.log(wallet);
-      if (localStorageData) {
-        setisaPatient(true);
-        //DEBUGING TO CHECK WHAT DATA IS STORED
-        console.log(JSON.parse(localStorageData));
-        return;
-      } else {
-        console.log("Now calling wallet");
-        // wallet.callMethod({
-        //   contractId: contractId,
-        //   method: "get_patient",
-        // })
-        // .then(async (result) => {
-        // console.log(result);
-        // localStorage.setItem("userinfo", JSON.stringify(result));
-        // });
-        wallet
-          .viewMethod({
-            contractId: contractId,
-            method: "get_patient_workaround",
-            args: {
-              account_id: await wallet.getAccountId(),
-            },
-          })
-          .then(async (result) => {
-            console.log(result);
-            setisaPatient(true);
-            setpatientInfo(result);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      // console.log(wallet);
+      // if (localStorageData) {
+      //   setisaPatient(true);
+      //   //DEBUGING TO CHECK WHAT DATA IS STORED
+      //   console.log(JSON.parse(localStorageData));
+      //   return;
+      // } else {
+      //   console.log("Now calling wallet");
+      //   // wallet.callMethod({
+      //   //   contractId: contractId,
+      //   //   method: "get_patient",
+      //   // })
+      //   // .then(async (result) => {
+      //   // console.log(result);
+      //   // localStorage.setItem("userinfo", JSON.stringify(result));
+      //   // });
+      //   wallet
+      //     .viewMethod({
+      //       contractId: contractId,
+      //       method: "get_patient_workaround",
+      //       args: {
+      //         account_id: await wallet.getAccountId(),
+      //       },
+      //     })
+      //     .then(async (result) => {
+      //       console.log(result);
+      //       setisaPatient(true);
+      //       setpatientInfo(result);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false); // Set loading back to false after the call completes
     }
   };
   // Function to handle tab click
@@ -85,7 +91,13 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
   };
 
   useEffect(() => {
-    if (isSignedIn && !isaPatient) checkPatientStatus();
+    if (isSignedIn && !isaPatient) {
+      setLoading(true); // Set loading to true before making the API call
+      checkPatientStatus()
+        .finally(() => {
+          setLoading(false); // Set loading back to false after the call completes
+        });
+    }
   }, []);
 
 
@@ -96,6 +108,7 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
           <Link to={"/"}>Home</Link>
         </li>
       </ul>
+      {loading && <Loading />} 
       {/* Patient Information */}
       <div className="patient-profile">
         <div className="right-section">
