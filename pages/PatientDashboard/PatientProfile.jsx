@@ -41,40 +41,40 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
 
     try {
           await new Promise((resolve) => setTimeout(resolve, 2000));
-      // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
-      // console.log(wallet);
-      // if (localStorageData) {
-      //   setisaPatient(true);
-      //   //DEBUGING TO CHECK WHAT DATA IS STORED
-      //   console.log(JSON.parse(localStorageData));
-      //   return;
-      // } else {
-      //   console.log("Now calling wallet");
-      //   // wallet.callMethod({
-      //   //   contractId: contractId,
-      //   //   method: "get_patient",
-      //   // })
-      //   // .then(async (result) => {
-      //   // console.log(result);
-      //   // localStorage.setItem("userinfo", JSON.stringify(result));
-      //   // });
-      //   wallet
-      //     .viewMethod({
-      //       contractId: contractId,
-      //       method: "get_patient_workaround",
-      //       args: {
-      //         account_id: await wallet.getAccountId(),
-      //       },
-      //     })
-      //     .then(async (result) => {
-      //       console.log(result);
-      //       setisaPatient(true);
-      //       setpatientInfo(result);
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //     });
-      // }
+      return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
+      console.log(wallet);
+      if (localStorageData) {
+        setisaPatient(true);
+        //DEBUGING TO CHECK WHAT DATA IS STORED
+        console.log(JSON.parse(localStorageData));
+        return;
+      } else {
+        console.log("Now calling wallet");
+        // wallet.callMethod({
+        //   contractId: contractId,
+        //   method: "get_patient",
+        // })
+        // .then(async (result) => {
+        // console.log(result);
+        // localStorage.setItem("userinfo", JSON.stringify(result));
+        // });
+        wallet
+          .viewMethod({
+            contractId: contractId,
+            method: "get_patient_workaround",
+            args: {
+              account_id: await wallet.getAccountId(),
+            },
+          })
+          .then(async (result) => {
+            console.log(result);
+            setisaPatient(true);
+            setpatientInfo(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     } catch (error) {
       console.log(error);
     } finally {
