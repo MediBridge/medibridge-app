@@ -40,40 +40,39 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
     console.log("Checking the Patients status");
 
     try {
-          await new Promise((resolve) => setTimeout(resolve, 2000));
-      return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
+          
       console.log(wallet);
       if (localStorageData) {
         setisaPatient(true);
         //DEBUGING TO CHECK WHAT DATA IS STORED
-        console.log(JSON.parse(localStorageData));
+        console.log(JSON.parse(localStorageData),"Here's the local data");
         return;
       } else {
         console.log("Now calling wallet");
-        // wallet.callMethod({
-        //   contractId: contractId,
-        //   method: "get_patient",
-        // })
-        // .then(async (result) => {
-        // console.log(result);
-        // localStorage.setItem("userinfo", JSON.stringify(result));
-        // });
-        wallet
-          .viewMethod({
-            contractId: contractId,
-            method: "get_patient_workaround",
-            args: {
-              account_id: await wallet.getAccountId(),
-            },
-          })
-          .then(async (result) => {
-            console.log(result);
-            setisaPatient(true);
-            setpatientInfo(result);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        wallet.callMethod({
+          contractId: contractId,
+          method: "get_patient",
+        })
+        .then(async (result) => {
+        console.log(result,"This is result and data of patient");
+        localStorage.setItem("userinfo", JSON.stringify(result));
+        });
+        // wallet
+        //   .viewMethod({
+        //     contractId: contractId,
+        //     method: "get_patient_workaround",
+        //     args: {
+        //       account_id: await wallet.getAccountId(),
+        //     },
+        //   })
+        //   .then(async (result) => {
+        //     console.log(result);
+        //     setisaPatient(true);
+        //     setpatientInfo(result);
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
       }
     } catch (error) {
       console.log(error);

@@ -18,7 +18,7 @@ import PatientLayout from "./pages/PatientDashboard/PatientLayout";
 import About from './pages/About';
 import Contact from "./pages/Contact";
 import PatientProfile from './pages/PatientDashboard/PatientProfile';
-import Test from "./pages/Test";
+import Test2 from "./pages/Test2";
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
 console.log(CONTRACT_ADDRESS);
 
@@ -26,7 +26,7 @@ console.log(CONTRACT_ADDRESS);
 // Having the key enables to call non-payable methods without interrupting the user to sign
 var wallet
 try {
- wallet = new Wallet({ createAccessKeyFor: "testing1111.testnet" });
+ wallet = new Wallet({ createAccessKeyFor: CONTRACT_ADDRESS });
  
 } catch (error) {
   console.log(error);
@@ -49,7 +49,7 @@ window.onload = async () => {
     },
     {
       path: "/test",
-      element: <Test />,
+      element: <Test2 />,
     },
     {
       path: "/contact",
