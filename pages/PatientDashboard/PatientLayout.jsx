@@ -12,45 +12,31 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   
     try {
       // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
-      if (localStorageData) {
-        setisaPatient(true);
-        //DEBUGING TO CHECK WHAT DATA IS STORED
-        console.log("Local storage found");
-        console.log(JSON.parse(localStorageData));
-        return;
-      }
-      else{
+      // if (localStorageData) {
+      //   setisaPatient(true);
+      //   return;
+      // }
+      // else{
         console.log("Now calling wallet");
-        wallet.callMethod({
-          contractId: contractId,
-          method: "get_patient",
-        })
-        .then(async (result) => {
-        console.log(result);
-        localStorage.setItem("userinfo", JSON.stringify(result));
-        });
-      //   wallet.viewMethod({
-      //       contractId: contractId,
-      //       method: "get_patient_workaround",
-      //       args:{
-      //           account_id:await wallet.getAccountId()
-      //       }
-      //     })
-      //     .then(async (result) => {
-      //     console.log(result);
-      //     setisaPatient(true);
-      //     })
-      //     .catch(error=>{
-      // setisaPatient(false);
-
-      //       console.log(error);
-      //     });
-      }
-     
+      //   wallet.callMethod({
+      //     contractId: contractId,
+      //     method: "get_patient",
+      //   })
+      //   .then(async (result) => {
+      //   console.log(result);
+      //   console.log("This is the result of function call");
+      //   localStorage.setItem("userinfo", JSON.stringify(result));
+      // })
+      // .catch((error)=>{
+      //   console.log("Error while trying to find the patient",error);
+      // })
+     const data = await wallet.viewMethod({ method: 'get_patient_workaround', args: { account_id: wallet.accountId },contractId });
+     console.log(data);
+     setisaPatient(true);
+      // }
     } catch (error) {
       setisaPatient(false);
       console.log(error);
-     
     }
   };
 
@@ -80,12 +66,13 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
           </li>
         </ul>
       </nav>
-
+      {/* THIS LOGIC CHECKS IF PATIENT IS ALREADY SIGNED IN */}
       {!isSignedIn ? (
         <SignInPrompt onClick={() => wallet.signIn()} />
       ) : isaPatient ? (
         <Outlet />
       ) : (
+        // ONBOARDING FORM IN CASE PATIENT IS NOT SIGNED IN
         <AddNewPatient
           isSignedIn={isSignedIn}
           contractId={contractId}

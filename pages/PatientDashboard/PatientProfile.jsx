@@ -45,18 +45,23 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
       if (localStorageData) {
         setisaPatient(true);
         //DEBUGING TO CHECK WHAT DATA IS STORED
-        console.log(JSON.parse(localStorageData),"Here's the local data");
+        const data = JSON.parse(localStorageData);
+        console.log(data,"Here's the local data");
         return;
       } else {
         console.log("Now calling wallet");
-        wallet.callMethod({
-          contractId: contractId,
-          method: "get_patient",
-        })
-        .then(async (result) => {
-        console.log(result,"This is result and data of patient");
-        localStorage.setItem("userinfo", JSON.stringify(result));
-        });
+        // wallet.callMethod({
+        //   contractId: contractId,
+        //   method: "get_patient",
+        // })
+        // .then(async (result) => {
+        // console.log(result,"This is result and data of patient");
+        // localStorage.setItem("userinfo", JSON.stringify(result));
+        // });
+        const data = await wallet.viewMethod({ method: 'get_patient_workaround', args: { account_id: wallet.accountId },contractId });
+        console.log(data);
+        setisaPatient(true);
+        setpatientInfo(data)
         // wallet
         //   .viewMethod({
         //     contractId: contractId,

@@ -54,6 +54,7 @@ export class Wallet {
 
   // Sign-out method
   signOut() {
+    localStorage.setItem("userinfo","");
     this.wallet.signOut();
     this.wallet = this.accountId = this.createAccessKeyFor = null;
     window.location.replace(window.location.origin + window.location.pathname);

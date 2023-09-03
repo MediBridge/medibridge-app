@@ -32,6 +32,7 @@ const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
               toast("Registered Patient", {
                 toastId: "registeredPatient",
               });
+              window.location.reload();
             });
         } catch (error) {
           console.log("Error while Registering Patient", error);
@@ -41,36 +42,12 @@ const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
         }
     };
 
-    const handlePhotoUpload = (e) => {
-        const selectedPhoto = e.target.files[0];
-        setPhoto(selectedPhoto);
-    };
-
     return (
     <div>
         
         <div className="center-container">
         <div className="add-patient-container">
             <h1 className="add-patient-title">Add New Patient</h1>
-            {/* <div className="photo-container"> */}
-            {/* {photo ? (
-                <img
-                src={URL.createObjectURL(photo)}
-                alt="Patient"
-                className="uploaded-photo"
-                />
-            ) : ( */}
-                {/* <div className="default-photo"> */}
-                {/* Placeholder image or default SVG */}
-                {/* <img
-                    src="placeholder-image.png"
-                    alt="Default"
-                    className="default-image"
-                />
-                </div>
-            )} */}
-            {/* <input type="file" accept="image/*" onChange={handlePhotoUpload} /> */}
-            {/* </div> */}
             <div className="input-container">
             <label>Full Name:</label>
             <input
