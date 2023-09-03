@@ -3,21 +3,17 @@ import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
 import AddNewPatient from "../AddNewPatient";
 const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
-  console.log(isSignedIn);
   const [isaPatient, setisaPatient] = useState(false);
   const localStorageData = localStorage.getItem("userinfo");
 
   const checkPatientStatus = async () => {
-    console.log("Checking the Patients status");
   
     try {
-      // return await wallet.viewMethod({ method: 'get_patient', args: { id: wallet.accountId },contractId })
       // if (localStorageData) {
       //   setisaPatient(true);
       //   return;
       // }
       // else{
-        console.log("Now calling wallet");
       //   wallet.callMethod({
       //     contractId: contractId,
       //     method: "get_patient",

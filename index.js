@@ -20,7 +20,6 @@ import Contact from "./pages/Contact";
 import PatientProfile from './pages/PatientDashboard/PatientProfile';
 import Test2 from "./pages/Test2";
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
-console.log(CONTRACT_ADDRESS);
 
 // When creating the wallet you can optionally ask to create an access key
 // Having the key enables to call non-payable methods without interrupting the user to sign

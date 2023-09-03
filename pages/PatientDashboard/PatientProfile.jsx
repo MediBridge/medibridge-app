@@ -17,9 +17,14 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
     blood_type:"AB+",
     gender:"Gender",
     records: [
-      // ... mock records data ...
-      "records 123",
-      "records1232",
+      {
+        MedicalRecord:{
+          condition: "Fever",
+          record_data: "Some medical data about fever",
+          date: "2023-08-15",
+          isPublic: true,
+        }
+      }
     ],
     allergies: [
       // ... mock allergies data ...
@@ -37,11 +42,8 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
   //GET DETAILS OF THE PATIENT
   const checkPatientStatus = async () => {
     setLoading(true);
-    console.log("Checking the Patients status");
 
     try {
-          
-      console.log(wallet);
       if (localStorageData) {
         setisaPatient(true);
         //DEBUGING TO CHECK WHAT DATA IS STORED
@@ -62,22 +64,6 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
         console.log(data);
         setisaPatient(true);
         setpatientInfo(data)
-        // wallet
-        //   .viewMethod({
-        //     contractId: contractId,
-        //     method: "get_patient_workaround",
-        //     args: {
-        //       account_id: await wallet.getAccountId(),
-        //     },
-        //   })
-        //   .then(async (result) => {
-        //     console.log(result);
-        //     setisaPatient(true);
-        //     setpatientInfo(result);
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   });
       }
     } catch (error) {
       console.log(error);
@@ -172,7 +158,7 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
 
           {/* Tab Content */}
           {activeTab === "records" && (
-            <RecordsTab records={patientInfo.records} />
+            <RecordsTab records={patientInfo.records} isSignedIn={isSignedIn} contractId={contractId} wallet={wallet} />
           )}
           {activeTab === "allergies" && (
             <AllergiesTab allergies={patientInfo.allergies} />
