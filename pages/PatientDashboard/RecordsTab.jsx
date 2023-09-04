@@ -53,21 +53,6 @@ const RecordsTab = ({ records,isSignedIn, contractId, wallet }) => {
     try {
       const response = await axios.post('http://localhost:3000/decrypt', { url });
 
-
-    //  // Create a Blob from the response data
-    //  const blob = new Blob([response.data], { type: 'application/pdf' });
-
-    //  // Create a URL for the Blob
-    //  const blobUrl = window.URL.createObjectURL(blob);
-
-    //  // Create a temporary <a> element to trigger the download
-    //  const link = document.createElement('a');
-    //  link.href = blobUrl;
-    //  link.download = 'decrypted.pdf'; // Specify the filename for the downloaded PDF
-    //  link.click();
-
-    //  // Release the allocated URL object
-    //  window.URL.revokeObjectURL(blobUrl);
     console.log(response.data);
     updateMyData(response.data);
     // console.log(myData);
