@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import MyContext from "../../Context/MyContext";
+import { useNavigate } from "react-router-dom";
 const RecordsTab = ({ records,isSignedIn, contractId, wallet }) => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [condition, setCondition] = useState(""); // Add this line
@@ -7,6 +9,16 @@ const RecordsTab = ({ records,isSignedIn, contractId, wallet }) => {
   const [date, setDate] = useState(""); // Add this line
   const [isPublic, setIsPublic] = useState("public"); // Add this line  // Mock data for records
   const [uploadStatus, setUploadStatus] = useState(""); // STATUS OF THE FILE BEING UPLOADED TO IPFS
+  const [decryptedPDF, setDecryptedPDF] = useState(null);
+  const { documentData, updateMyData } = useContext(MyContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(documentData);
+    if(documentData)
+    navigate("/viewdata");
+  }, [documentData])
+  
   const mockRecords = [
     {
       MedicalRecord:{
@@ -37,7 +49,32 @@ const RecordsTab = ({ records,isSignedIn, contractId, wallet }) => {
     return timestamp.slice(-6) + randomPart; // Combine timestamp and random number
   }
 
+  const getDocument=async (url)=>{
+    try {
+      const response = await axios.post('http://localhost:3000/decrypt', { url });
 
+
+    //  // Create a Blob from the response data
+    //  const blob = new Blob([response.data], { type: 'application/pdf' });
+
+    //  // Create a URL for the Blob
+    //  const blobUrl = window.URL.createObjectURL(blob);
+
+    //  // Create a temporary <a> element to trigger the download
+    //  const link = document.createElement('a');
+    //  link.href = blobUrl;
+    //  link.download = 'decrypted.pdf'; // Specify the filename for the downloaded PDF
+    //  link.click();
+
+    //  // Release the allocated URL object
+    //  window.URL.revokeObjectURL(blobUrl);
+    console.log(response.data);
+    updateMyData(response.data);
+    // console.log(myData);
+    } catch (error) {
+      console.error('Error decrypting PDF:', error);
+    }
+  }
   // THIS SECTION HANDLES FILE UPLOADS
   const handleUploadClick = async () => {
     setShowUploadModal(true);
@@ -180,7 +217,8 @@ const RecordsTab = ({ records,isSignedIn, contractId, wallet }) => {
             { recordsToDisplay && recordsToDisplay.map((record, index) => (
               <tr className="record-row" key={index}>
                 <td>{ record.MedicalRecord.condition}</td>
-                <td><a href={record.MedicalRecord.record_data}>Document</a> </td>
+                <td><div onClick={e=> getDocument(record.MedicalRecord.record_data) } >Document</div> </td>
+                {/* <td>{decryptedPDF && <iframe title="Decrypted PDF" src={decryptedPDF} width="100%" height="600px" />}</td> */}
                 <td>{record.MedicalRecord.date}</td>
                 <td>{record.MedicalRecord.isPublic ? "Public" : "Private"}</td>
               </tr>

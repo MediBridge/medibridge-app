@@ -19,6 +19,8 @@ import About from './pages/About';
 import Contact from "./pages/Contact";
 import PatientProfile from './pages/PatientDashboard/PatientProfile';
 import Test2 from "./pages/Test2";
+import MyProvider from './Context/MyProvider';
+import RecordView from './pages/RecordView';
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
 
 // When creating the wallet you can optionally ask to create an access key
@@ -55,6 +57,10 @@ window.onload = async () => {
       element: <Contact />,
     },
     {
+      path:"/viewdata",
+      element:<RecordView />
+    },
+    {
       path: "/doctor",
       element: <DoctorLayout isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet}/>,
       children:[
@@ -87,5 +93,9 @@ window.onload = async () => {
       element: <App isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet} />,
     },
   ]);
-  root.render(<RouterProvider router={router} />);
+  root.render(
+  <MyProvider>
+    <RouterProvider router={router} />
+  </MyProvider>
+  );
 }
