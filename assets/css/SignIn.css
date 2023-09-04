@@ -1,7 +1,13 @@
+/* SignInPrompt component styles */
 
-
-  /* SignInPrompt component styles */
-  
+.SigninBackground {
+    background: linear-gradient(90deg, #ffcc00 0%, #ff6f61 100%); /* Adjust the gradient colors */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .SignInPrompt {
     display: flex;
     justify-content: center;
