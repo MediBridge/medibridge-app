@@ -24,9 +24,31 @@ const RecordsTab = ({ records }) => {
   ];
 
   // Use provided records if available, otherwise use mock records
-  const recordsToDisplay = records || mockRecords;
-  const handleUploadClick = () => {
-    setShowUploadModal(true); 
+  const recordsToDisplay = records;
+  console.log(records);
+  // console.log(recordsToDisplay);
+  // UTILITY FUNCTION TO GENERATE A UNIQUE ID
+  function generateUniqueId() {
+    const timestamp = new Date().getTime().toString(); // Get current timestamp
+    const randomPart = Math.floor(Math.random() * 1000000).toString().padStart(6, '0'); // Generate random 6-digit number
+  
+    return timestamp.slice(-6) + randomPart; // Combine timestamp and random number
+  }
+
+  const getDocument=async (url)=>{
+    try {
+      const response = await axios.post('http://localhost:3000/decrypt', { url });
+
+    console.log(response.data);
+    updateMyData(response.data);
+    // console.log(myData);
+    } catch (error) {
+      console.error('Error decrypting PDF:', error);
+    }
+  }
+  // THIS SECTION HANDLES FILE UPLOADS
+  const handleUploadClick = async () => {
+    setShowUploadModal(true);
     const input = document.createElement("input");
     input.type = "file";
     input.addEventListener("change", (event) => {
