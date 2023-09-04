@@ -111,9 +111,9 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
               </div>
             ) : (
               <div>
-                <div>{patientInfo.full_name}</div>
-                <div>{patientInfo.birthday}</div>
-                <div>Blood Type: {patientInfo.blood_type}</div>
+                  <div className="patient-name">{patientInfo.full_name}</div>
+                  <div className="patient-details">Birthday:&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;{patientInfo.birthday}</div>
+                  <div className="patient-details">Blood Type: &nbsp;&nbsp;&nbsp;{patientInfo.blood_type}</div>
               </div>
             )}
             <button className="edit-button" onClick={handleEditClick}>

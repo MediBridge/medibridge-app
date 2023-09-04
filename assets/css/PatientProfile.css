@@ -26,9 +26,7 @@
 }
 
 
-/* PatientProfile.css */
-
-/* Container for the entire patient profile */
+/* Patient profile */
 .patient-profile {
   display: flex;
   margin-top: 50px;
@@ -36,7 +34,42 @@
   background-color: #ffffff;
 }
 
-/* Styles for the right section (patient-info) */
+/* Patient info section */
+.patient-info {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.patient-info .patient-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.patient-info .patient-details {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+/* Edit button style */
+.patient-info .edit-button {
+  background-color: #ffd166;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.patient-info .edit-button:hover {
+  background-color: #d6a83b;
+}
+
+/* Right section (patient-info) */
 .right-section {
   width: 30%;
   align-self: flex-start;
@@ -48,23 +81,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Edit button style */
-.edit-button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #ffd166;
-  border: none;
-  border-radius: 5px;
-  color: black;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.edit-button:hover {
-  background-color: #e9c00d;
-}
-
-/* Styles for the left section (tabs and tab content) */
+/* Tabs and tab content */
 .tabs {
   width: 50%;
 }
@@ -98,9 +115,7 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Rest of the existing CSS... */
-
-
+/* Shared styles for record items */
 .record-item,
 .allergy-item,
 .immunization-item,
@@ -112,25 +127,8 @@
   background-color: #f8f8f8;
 }
 
-/* AllergiesTab.css */
-
-.allergy-item {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-}
-
-.record-item {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f8f8f8;
-}
-
-.tab-content .record-table {
+/* Record table styles */
+.record-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -154,7 +152,6 @@
 
 .record-row:hover {
   background-color: #ffd166;
-  cursor: pointer;
 }
 
 .footer {
