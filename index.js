@@ -6,7 +6,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
-// NEAR
 import { Wallet } from './near-wallet';
 import LandingPage from './pages/LandingPage';
 import PatientLayout from "./pages/PatientDashboard/PatientLayout";
@@ -14,7 +13,8 @@ import About from './pages/About';
 import Contact from "./pages/Contact";
 import PatientProfile from './pages/PatientDashboard/PatientProfile';
 import MyProvider from './Context/MyProvider';
-import RecordView from './pages/RecordView';
+import RecordView from './pages/Records/RecordView';
+import Login from './pages/Records/Login';
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
 
 
@@ -45,6 +45,11 @@ window.onload = async () => {
       path: "/contact",
       element: <Contact />,
     },
+    {
+      path:"/login",
+      element:<Login />
+    }
+    ,
     {
       path:"/viewdata",
       element:<RecordView />

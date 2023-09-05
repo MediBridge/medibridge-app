@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
-import AddNewPatient from "../AddNewPatient";
+import AddNewPatient from "./AddNewPatient";
 import Loading from "../../components/Loading";
 const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   const [isaPatient, setisaPatient] = useState(false);
@@ -13,7 +13,6 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
         args: { account_id: wallet.accountId },
         contractId,
       });
-      console.log(data);
       setTimeout(() => {
       setisaPatient(true);
         setloading(false);

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import MyContext from '../Context/MyContext';
+import MyContext from '../../Context/MyContext';
 
 const RecordView = () => {
   const { documentData, updateMyData } = useContext(MyContext);

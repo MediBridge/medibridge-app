@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../assets/css/AddNewPatient.css"; // Import your CSS file for styling
+import "../../assets/css/AddNewPatient.css"; // Import your CSS file for styling
 import { ToastContainer, toast } from "react-toastify";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
 
 const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
     const [fullName, setFullName] = useState("");
