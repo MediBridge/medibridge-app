@@ -18,7 +18,7 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
   useEffect(() => {
     if (documentData) navigate("/viewdata");
   }, [documentData]);
-  
+
   // Use provided records if available, otherwise use mock records
   const recordsToDisplay = records;
   const documentPassword = localStorage.getItem("medibridgePassword");
@@ -48,6 +48,8 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
       // console.log(myData);
     } catch (error) {
       console.error("Error decrypting PDF:", error);
+      setloading(false);
+
     }
   };
   // THIS SECTION HANDLES FILE UPLOADS
@@ -62,6 +64,7 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
         formData.append("pdfFile", file);
         formData.append("key", documentPassword);
         try {
+          setloading(true);
           const response = await fetch("http://localhost:3000/fileUpload", {
             method: "POST",
             body: formData,
@@ -79,6 +82,9 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
         } catch (error) {
           console.log(error);
           setUploadStatus("An error occurred during the upload.");
+        }
+        finally{
+         setloading(false);
         }
       }
     });
@@ -112,9 +118,9 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
       })
       .then(async (result) => {
         console.log("Record has been succesfully added");
-        toast("Patient added!",{
-          toastId:"PatientAddSuccess"
-        });
+        setTimeout(() => {
+        window.location.reload();
+        }, 500);
       })
       .catch((error) => {
         console.log("Error while trying to upload to the chain", error);

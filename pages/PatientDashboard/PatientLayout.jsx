@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { SignInPrompt, SignOutButton } from "../../ui-components";
 import AddNewPatient from "../AddNewPatient";
+import Loading from "../../components/Loading";
 const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   const [isaPatient, setisaPatient] = useState(false);
-
+  const [loading, setloading] = useState(true);
   const checkPatientStatus = async () => {
     try {
       const data = await wallet.viewMethod({
@@ -13,14 +14,21 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
         contractId,
       });
       console.log(data);
+      setTimeout(() => {
       setisaPatient(true);
+        setloading(false);
+      }, 500);
     } catch (error) {
-      setisaPatient(false);
+      setTimeout(() => {
+      setisaPatient(true);
+      setloading(false);
+      }, 500);
       console.log(error);
     }
   };
 
   useEffect(() => {
+    setloading(true);
     if (isSignedIn && !isaPatient) checkPatientStatus();
   }, []);
 
@@ -45,18 +53,23 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
         </ul>
       </nav>
       {/* THIS LOGIC CHECKS IF PATIENT IS ALREADY SIGNED IN */}
-      {!isSignedIn ? (
-        <SignInPrompt onClick={() => wallet.signIn()} />
-      ) : isaPatient ? (
-        <Outlet />
-      ) : (
-        // ONBOARDING FORM IN CASE PATIENT IS NOT SIGNED IN
-        <AddNewPatient
-          isSignedIn={isSignedIn}
-          contractId={contractId}
-          wallet={wallet}
-        />
-      )}
+      {
+        loading?
+        <Loading />:
+        !isSignedIn ? (
+          <SignInPrompt onClick={() => wallet.signIn()} />
+        ) : isaPatient ? (
+          <Outlet />
+        ) : (
+          // ONBOARDING FORM IN CASE PATIENT IS NOT SIGNED IN
+          <AddNewPatient
+            isSignedIn={isSignedIn}
+            contractId={contractId}
+            wallet={wallet}
+          />
+        )
+      }
+  
       <footer className="fade-in">
         <ul className="footer-links">
           <li>

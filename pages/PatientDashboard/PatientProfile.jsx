@@ -36,7 +36,7 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
     procedures: [],
   });
   const [isaPatient, setisaPatient] = useState(false);
-  const [loading, setLoading] = useState(false); // Declare the loading state here
+  const [loading, setLoading] = useState(true); // Declare the loading state here
   //GET DETAILS OF THE PATIENT
   const checkPatientStatus = async () => {
     setLoading(true);
@@ -51,7 +51,7 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
     } finally {
       setTimeout(function() {
         setLoading(false); 
-      }, 2000); 
+      }, 1000); 
        // Set loading back to false after the call completes
     }
   };
@@ -71,7 +71,7 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
         .finally(() => {
           setTimeout(function() {
             setLoading(false); 
-          }, 2000); 
+          }, 1000); 
           // Set loading back to false after the call completes
         });
     }
