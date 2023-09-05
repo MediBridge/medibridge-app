@@ -128,6 +128,7 @@
 }
 
 /* Record table styles */
+/* Record table styles */
 .record-table {
   width: 100%;
   border-collapse: collapse;
@@ -136,12 +137,12 @@
 
 .record-table th,
 .record-table td {
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 1px solid #e0e0e0; /* Use a lighter border color */
 }
 
 .record-table th {
-  background-color: #f3f3f3;
+  background-color: #f8f8f8; /* Light background color for header */
   font-weight: bold;
   text-align: left;
 }
@@ -150,9 +151,32 @@
   text-align: left;
 }
 
-.record-row:hover {
-  background-color: #ffd166;
+/* Style for alternating rows */
+.record-table tr:nth-child(even) {
+  background-color: #f0f0f0; /* Alternate row background color */
 }
+
+/* Hover effect */
+.record-table tr:hover {
+  background-color: #ffd166; /* Hover background color */
+  transition: background-color 0.3s ease;
+}
+
+/* Add box-shadow to the table for depth */
+.record-table {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Center align text in specific columns */
+.record-table .text-center {
+  text-align: center;
+}
+
+/* Right align text in specific columns */
+.record-table .text-right {
+  text-align: right;
+}
+
 
 .footer {
   background-color: #e7ecff;

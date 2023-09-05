@@ -4,6 +4,7 @@ import './assets/css/SignIn.css';
 
 export function SignInPrompt({ onClick}) {
   return (
+    <div className='SigninBackground'>
     <main className='SignInPrompt'>
       <div className='SignInContent'>
       <h3>
@@ -17,8 +18,10 @@ export function SignInPrompt({ onClick}) {
         <button onClick={onClick}>Sign in with your NEAR Wallet</button>
       </p>
       </div>
+      
 
     </main>
+    </div>
   );
 }
 
