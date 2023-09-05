@@ -10,27 +10,11 @@ const PatientOnBoarding = ({ isSignedIn, contractId, wallet }) => {
   const [gender, setgender] = useState("male");
   const [bloodType, setbloodType] = useState("O+");
   const [loading, setloading] = useState(false);
-  const onBoardPatient = async (e) => {
-    e.preventDefault(); 
-    try {
-      wallet
-        .callMethod({
-          method: "register_patient",
-          args: { id: wallet.accountId, name: userName },
-          contractId,
-        })
-        .then(async () => {
-          console.log("Registered patient");
-          toast("Registered patient");
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const addPatient = async (e) => {
     e.preventDefault();
     try {
       console.log(wallet);
+      setloading(true);
       wallet
         .callMethod({
           method: "add_patient",
@@ -47,18 +31,19 @@ const PatientOnBoarding = ({ isSignedIn, contractId, wallet }) => {
           toast("Registered Patient", {
             toastId: "registeredPatient",
           });
+          setloading(false);
         });
     } catch (error) {
       console.log("Error while Registering Patient", error);
       toast("Failed to Register Patient", {
         toastId: "failureToRegister",
       });
+      setloading(false);
     }
   };
   return (
     <div className="user-authentication fade-in">
       <ToastContainer />
-
       {loading ? (
         <Loading />
       ) : (

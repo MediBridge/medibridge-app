@@ -4,40 +4,22 @@ import { SignInPrompt, SignOutButton } from "../../ui-components";
 import AddNewPatient from "../AddNewPatient";
 const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   const [isaPatient, setisaPatient] = useState(false);
-  const localStorageData = localStorage.getItem("userinfo");
 
   const checkPatientStatus = async () => {
-  
     try {
-      // if (localStorageData) {
-      //   setisaPatient(true);
-      //   return;
-      // }
-      // else{
-      //   wallet.callMethod({
-      //     contractId: contractId,
-      //     method: "get_patient",
-      //   })
-      //   .then(async (result) => {
-      //   console.log(result);
-      //   console.log("This is the result of function call");
-      //   localStorage.setItem("userinfo", JSON.stringify(result));
-      // })
-      // .catch((error)=>{
-      //   console.log("Error while trying to find the patient",error);
-      // })
-     const data = await wallet.viewMethod({ method: 'get_patient_workaround', args: { account_id: wallet.accountId },contractId });
-     console.log(data);
-     setisaPatient(true);
-      // }
+      const data = await wallet.viewMethod({
+        method: "get_patient_workaround",
+        args: { account_id: wallet.accountId },
+        contractId,
+      });
+      console.log(data);
+      setisaPatient(true);
     } catch (error) {
       setisaPatient(false);
       console.log(error);
     }
   };
 
- 
-  
   useEffect(() => {
     if (isSignedIn && !isaPatient) checkPatientStatus();
   }, []);

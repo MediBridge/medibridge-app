@@ -39,7 +39,7 @@ label {
     margin-bottom: 5px;
     color: #333;
 }
-input[type='text'], input[type='date'], select {
+input[type='text'], input[type='date'],input[type='password'], select {
     background-color: #e7ecff;
     width: 90%;
     padding: 8px;

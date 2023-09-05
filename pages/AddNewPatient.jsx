@@ -5,12 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
     const [fullName, setFullName] = useState("");
     const [birthday, setBirthday] = useState("");
-    const [gender, setGender] = useState("Male");
+    const [gender, setGender] = useState("Female");
     const [bloodType, setBloodType] = useState("");
-    const [photo, setPhoto] = useState(null); // State for the uploaded photo
+    const [otherGender, setotherGender] = useState("");
+    const [documentPassword, setdocumentPassword] = useState("");
 
-
-    
     //LOGIC TO ADD A PATIENT TO THE CONTRACT
     const handleAddPatient = (e) => {
         e.preventDefault();
@@ -44,7 +43,7 @@ const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
 
     return (
     <div>
-        
+        <ToastContainer />
         <div className="center-container">
         <div className="add-patient-container">
             <h1 className="add-patient-title">Add New Patient</h1>
@@ -71,6 +70,17 @@ const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
+            { gender==="Other" &&
+            <>
+            <label>If other, then:</label>
+            <input
+                type="text"
+                value={otherGender}
+                onChange={(e) => setotherGender(e.target.value)}
+            />
+            </>
+            
+            }
             </div>
             <div className="input-container">
             <label>Blood Type:</label>
@@ -80,6 +90,16 @@ const AddNewPatient = ({ isSignedIn, contractId, wallet }) => {
                 onChange={(e) => setBloodType(e.target.value)}
             />
             </div>
+            <div className="input-container">
+            <label>Document Password:</label>
+            <input
+                type="password"
+                value={documentPassword}
+                placeholder="This will be used constantly for encrypting your documents"
+                onChange={(e) => setdocumentPassword(e.target.value)}
+            />
+            </div>
+            
             <button className="add-patient-button" onClick={handleAddPatient}>
             Add Patient
             </button>
