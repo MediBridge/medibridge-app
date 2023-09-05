@@ -37,38 +37,22 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
   });
   const [isaPatient, setisaPatient] = useState(false);
   const [loading, setLoading] = useState(false); // Declare the loading state here
-  const localStorageData = localStorage.getItem("userinfo");
-
   //GET DETAILS OF THE PATIENT
   const checkPatientStatus = async () => {
     setLoading(true);
-
     try {
-      if (localStorageData) {
-        setisaPatient(true);
-        //DEBUGING TO CHECK WHAT DATA IS STORED
-        const data = JSON.parse(localStorageData);
-        console.log(data,"Here's the local data");
-        return;
-      } else {
         console.log("Now calling wallet");
-        // wallet.callMethod({
-        //   contractId: contractId,
-        //   method: "get_patient",
-        // })
-        // .then(async (result) => {
-        // console.log(result,"This is result and data of patient");
-        // localStorage.setItem("userinfo", JSON.stringify(result));
-        // });
         const data = await wallet.viewMethod({ method: 'get_patient_workaround', args: { account_id: wallet.accountId },contractId });
         console.log(data);
         setisaPatient(true);
         setpatientInfo(data)
-      }
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false); // Set loading back to false after the call completes
+      setTimeout(function() {
+        setLoading(false); 
+      }, 2000); 
+       // Set loading back to false after the call completes
     }
   };
   // Function to handle tab click
@@ -85,7 +69,10 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
       setLoading(true); // Set loading to true before making the API call
       checkPatientStatus()
         .finally(() => {
-          setLoading(false); // Set loading back to false after the call completes
+          setTimeout(function() {
+            setLoading(false); 
+          }, 2000); 
+          // Set loading back to false after the call completes
         });
     }
   }, []);
