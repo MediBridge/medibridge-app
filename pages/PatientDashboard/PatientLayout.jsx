@@ -5,7 +5,7 @@ import AddNewPatient from "./AddNewPatient";
 import Loading from "../../components/Loading";
 const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
   const [isaPatient, setisaPatient] = useState(false);
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   const checkPatientStatus = async () => {
     try {
       const data = await wallet.viewMethod({
@@ -18,16 +18,13 @@ const DoctorLayout = ({ isSignedIn, contractId, wallet }) => {
         setloading(false);
       }, 500);
     } catch (error) {
-      setTimeout(() => {
-      setisaPatient(true);
+      setisaPatient(false);
       setloading(false);
-      }, 500);
       console.log(error);
     }
   };
 
   useEffect(() => {
-    setloading(true);
     if (isSignedIn && !isaPatient) checkPatientStatus();
   }, []);
 
