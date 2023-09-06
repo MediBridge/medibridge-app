@@ -36,21 +36,24 @@
 
 /* Patient info section */
 .patient-info {
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   padding: 20px;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .patient-info .patient-name {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #0097b2; 
 }
 
 .patient-info .patient-details {
-  font-size: 18px;
-  margin-top: 5px;
+  font-size: 20px;
+  margin-top: 10px;
+  color: #333;
 }
 
 /* Edit button style */
@@ -88,8 +91,9 @@
 
 .tab-button {
   padding: 10px 20px;
-  background-color: #e7ecff;
-  border: 1px solid #ccc;
+  background-color: #66c2e0;
+  color: #ffffff;
+  border: 1px solid #ffffff;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -101,9 +105,8 @@
 }
 
 .tab-button.active {
-  background-color: #ffd166;
-  border-color: #e9c00d;
-  color: black;
+  background-color: #0097b2;
+  color: white;
 }
 
 .tab-content {
@@ -131,40 +134,39 @@
 /* Record table styles */
 .record-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-top: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
 }
 
 .record-table th,
 .record-table td {
-  padding: 12px;
-  border: 1px solid #e0e0e0; /* Use a lighter border color */
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
 }
 
 .record-table th {
-  background-color: #f8f8f8; /* Light background color for header */
+  background-color: #f8f8f8;
   font-weight: bold;
-  text-align: left;
 }
 
 .record-table td {
-  text-align: left;
+  background-color: #ffffff;
 }
 
 /* Style for alternating rows */
 .record-table tr:nth-child(even) {
-  background-color: #f0f0f0; /* Alternate row background color */
+  background-color: #f0f0f0;
 }
 
 /* Hover effect */
 .record-table tr:hover {
-  background-color: #ffd166; /* Hover background color */
+  background-color: #ffd166;
   transition: background-color 0.3s ease;
-}
-
-/* Add box-shadow to the table for depth */
-.record-table {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Center align text in specific columns */
@@ -176,6 +178,53 @@
 .record-table .text-right {
   text-align: right;
 }
+.immunizations-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.immunizations-table th,
+.immunizations-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.immunizations-table th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+.immunizations-table td {
+  background-color: #ffffff;
+}
+
+/* Style for alternating rows */
+.immunizations-table tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+/* Hover effect */
+.immunizations-table tr:hover {
+  background-color: #ffd166;
+  transition: background-color 0.3s ease;
+}
+
+/* Center align text in specific columns */
+.immunizations-table .text-center {
+  text-align: center;
+}
+
+/* Right align text in specific columns */
+.immunizations-table .text-right {
+  text-align: right;
+}
+
 
 
 .footer {
