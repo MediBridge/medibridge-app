@@ -2,10 +2,11 @@
 
 CONTRACT_DIRECTORY=./contract
 DEV_ACCOUNT_FILE="${CONTRACT_DIRECTORY}/dev-account.env"
+DEV_ACCOUNT_FILE2="${CONTRACT_DIRECTORY}/firebase.env"
 
 start () {
   echo The app is starting!
-  env-cmd -f $DEV_ACCOUNT_FILE parcel index.html --open
+  env-cmd -f $DEV_ACCOUNT_FILE2 parcel index.html --open
 }
 
 alert () {

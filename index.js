@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
   createHashRouter,
+  Route,
   RouterProvider,
+  Routes,
 } from "react-router-dom";
 import { createRoot } from 'react-dom/client';
 import { Wallet } from './near-wallet';
@@ -15,8 +17,10 @@ import PatientProfile from './pages/PatientDashboard/PatientProfile';
 import MyProvider from './Context/MyProvider';
 import RecordView from './pages/Records/RecordView';
 import Login from './pages/Records/Login';
+import auth from "./Firebase/firebase";
+import PatientRecordView from './pages/Records/PatientRecordView';
 const CONTRACT_ADDRESS = process.env.CONTRACT_NAME ;
-
+console.log(process.env.CONTRACT_NAME);
 
 var wallet
 try {
@@ -27,6 +31,20 @@ try {
 }
 const container = document.getElementById('root');
 const root = createRoot(container);
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Routes>
+<Route
+      {...rest}
+      render={(props) =>
+        auth().currentUser ? <Component {...props} /> : <Redirect to="/login" />
+      }
+    />
+    </Routes>
+    
+  );
+};
 // Setup on page load
 window.onload = async () => {
   const isSignedIn = await wallet.startUp();
@@ -52,7 +70,11 @@ window.onload = async () => {
     ,
     {
       path:"/viewdata",
-      element:<RecordView />
+      element:<RecordView/>
+    },
+    {
+      path:"/patientdata",
+      element:<PrivateRoute component={PatientRecordView} />
     },
     {
       path: "/patient",
