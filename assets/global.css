@@ -27,7 +27,7 @@ header {
   display: inline-block;
   margin: 5px;
   padding: 10px 20px;
-  background-color: #111B47;
+  background-color: #0097b2;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -378,8 +378,8 @@ section.search-patients {
 
 /* Footer styles ________________________________________________*/
 footer {
-  background-color: #e7ecff;
-  color: #110239;
+  background-color: #0097b2;
+  color: #ffffff;
   padding: 20px;
   text-align: center;
   position: fixed;
