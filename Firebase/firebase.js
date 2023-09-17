@@ -1,7 +1,8 @@
 // src/firebase.js
 
-import { initializeApp, getAuth } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 console.log(process.env.REACT_APP_FIREBASE_PROJECT_ID);
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -20,5 +21,5 @@ const analytics = getAnalytics(app);
     console.log(error);
 }
 export default app;
-
+export const auth = getAuth(app);
 // Add other Firebase services you want to use and export them here
