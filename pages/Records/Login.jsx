@@ -1,13 +1,25 @@
 // src/components/Login.js
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import app from "../../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider, getRedirectResult } from "firebase/auth";
 import {auth} from "../../Firebase/firebase";
+import "../../assets/css/RecordsLogin.css";
+import logoImage from "../../assets/MediBridge_logo.png";
 const auth = getAuth();
 const Login = () => {
   const navigate = useNavigate();
+  const [showText, setShowText] = useState(false);
+
+  useEffect(() => {
+    const typingTimeout = setTimeout(() => {
+      setShowText(true);
+    }, 1000);
+    return () => {
+      clearTimeout(typingTimeout);
+    };
+  }, []);
 
   
   const handleGoogleSignIn = async (e) => {
@@ -44,8 +56,13 @@ const Login = () => {
 
   
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="login-container">
+      {showText && (
+        <h1 className="typing-animation">
+          Hello  •‿• , Please Sign-In...
+        </h1>
+      )}
+      <img src={logoImage} alt="Logo" className="logo" />
       <button onClick={handleGoogleSignIn}>Sign in with Google</button>
     </div>
   );
