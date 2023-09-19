@@ -56,7 +56,7 @@ const Login = () => {
 
   
   return (
-    <div className="login-container">
+    <div className="login-container-google">
       {showText && (
         <h1 className="typing-animation">
           Hello  •‿• , Please Sign-In...

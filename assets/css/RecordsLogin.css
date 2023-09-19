@@ -1,30 +1,29 @@
-/* Styles for RecordsLogin Page*/
-div {
-    display: flex;
+/* Styles for RecordsLogin Page */
+
+
+.login-container-google {
+   display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-  }
-
-.login-container {
     position: relative;
     text-align: center;
     padding-top: 20px;
   }
   
-  .logo {
+  .login-container-google .logo {
     max-width: 350px;
     margin: 0 auto;
   }
 
-h1 {
+  .login-container-google h1 {
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
   }
   
-.typing-animation {
+  .login-container-google .typing-animation {
     overflow: hidden;
     white-space: nowrap;
     border-right: 2px solid transparent;
@@ -39,7 +38,7 @@ h1 {
       width: 100%;
     }
   }
-button {
+  .login-container-google button {
         padding: 10px 100px;
         background-color: #0097b2;
         color: white;
@@ -50,7 +49,7 @@ button {
         transition: background-color 0.3s ease;
 }
 
-button:hover {
+.login-container-google button:hover {
       background-color: #66c2e0;
     }
   
