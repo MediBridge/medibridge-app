@@ -7,12 +7,14 @@ import ImmunizationsTab from "../PatientDashboard/ImmunizationsTab";
 import ProceduresTab from "../PatientDashboard/ProceduresTab";
 import "../../assets/css/PatientProfile.css";
 import Loading from '../../components/Loading';
+import axios from 'axios';
 
 const PatientRecordView = ({ isSignedIn, contractId, wallet,isViewer }) => {
   const [activeTab, setActiveTab] = useState("records");
   const [loading, setLoading] = useState(true); // Declare the loading state here
   const [isEditMode, setIsEditMode] = useState(false); // State to track edit mode
   const [accountAddress, setaccountAddress] = useState("");
+  const userEmail = localStorage.getItem("googleData");
   const [patientInfo, setpatientInfo] = useState({
     full_name:"Full Name",
     birthday:"20/02/2020",
@@ -37,23 +39,15 @@ const PatientRecordView = ({ isSignedIn, contractId, wallet,isViewer }) => {
     immunizations: [],
     procedures: [],
   });
-  const checkPatientStatus = async () => {
-    setLoading(true);
-    try {
-        console.log("Now calling wallet");  
-        const data = await wallet.viewMethod({ method: 'get_patient_workaround', args: { account_id: wallet.accountId },contractId });
-        console.log(data);
-        setisaPatient(true);
-        setpatientInfo(data)
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTimeout(function() {
-        setLoading(false); 
-      }, 1000); 
-       // Set loading back to false after the call completes
-    }
-  };
+  const fetchUserInfo = async() =>{
+    console.log("Fetching information");
+    const data = await axios.post('http://localhost:3000/api/password/fetchinformation',{
+      "userEmail":userEmail,
+      "accountAddress":accountAddress
+    });
+    console.log(data);
+  }
+ 
   // Function to handle tab click
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -79,6 +73,7 @@ const PatientRecordView = ({ isSignedIn, contractId, wallet,isViewer }) => {
         <input type='text' value={accountAddress} onChange={e=>{
           setaccountAddress(e.target.value);
         }} />
+        <button onClick={fetchUserInfo}>Fetch Info!</button>
       </div>
       {/* Patient Information */}
       <div className="patient-profile">
