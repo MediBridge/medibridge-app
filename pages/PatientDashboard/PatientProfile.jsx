@@ -6,11 +6,14 @@ import ImmunizationsTab from "./ImmunizationsTab";
 import ProceduresTab from "./ProceduresTab";
 import "../../assets/css/PatientProfile.css";
 import Loading from "../../components/Loading";
+import axios from "axios";
 
 const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
   // State to track the active tab
   const [activeTab, setActiveTab] = useState("records");
   const [isEditMode, setIsEditMode] = useState(false); // State to track edit mode
+  const [emailData, setemailData] = useState("");
+  console.log(wallet);
   const [patientInfo, setpatientInfo] = useState({
     full_name:"Full Name",
     birthday:"20/02/2020",
@@ -38,6 +41,14 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
   const [isaPatient, setisaPatient] = useState(false);
   const [loading, setLoading] = useState(true); // Declare the loading state here
   //GET DETAILS OF THE PATIENT
+  const shareToEmail = async () =>{
+    const data= await axios.post('http://localhost:3000/api/password/sharepassword',{
+      "userAddress":wallet.accountId,
+      "email":emailData,
+      "password":localStorage.getItem("medibridgePassword")
+    })
+    setpatientInfo(data)
+  }
   const checkPatientStatus = async () => {
     setLoading(true);
     try {
@@ -106,6 +117,11 @@ const PatientProfile = ({ isSignedIn, contractId, wallet }) => {
             <button className="edit-button" onClick={handleEditClick}>
               {isEditMode ? "Save" : "Edit"}
             </button>
+          </div>
+          <div className="emailToShare">
+            <label>Add Email to share to person!</label>
+            <input type="text" value={emailData} onChange={e=>setemailData(e.target.value)}/>
+            <button onClick={shareToEmail}>Share!</button>
           </div>
         </div>
 

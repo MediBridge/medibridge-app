@@ -36,7 +36,7 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet,isViewer }) => {
   const getDocument = async (url) => {
     try {
       setloading(true);
-      const response = await axios.post("http://localhost:3000/api/decryptFile", {
+      const response = await axios.post("http://localhost:3000/api/file/decryptFile", {
         url: url,
         key: documentPassword,
       });
@@ -65,7 +65,7 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet,isViewer }) => {
         formData.append("key", documentPassword);
         try {
           setloading(true);
-          const response = await fetch("http://localhost:3000/api/fileUploadUsingEncryption", {
+          const response = await fetch("http://localhost:3000/api/file/fileUploadUsingEncryption", {
             method: "POST",
             body: formData,
           });

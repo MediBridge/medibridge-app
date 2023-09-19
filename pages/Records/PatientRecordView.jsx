@@ -45,7 +45,8 @@ const PatientRecordView = ({ isSignedIn, contractId, wallet,isViewer }) => {
       "userEmail":userEmail,
       "accountAddress":accountAddress
     });
-    console.log(data);
+    console.log(data.data.userINFO);
+    setpatientInfo(data.data.userINFO);
   }
  
   // Function to handle tab click
