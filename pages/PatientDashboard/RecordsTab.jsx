@@ -4,7 +4,7 @@ import MyContext from "../../Context/MyContext";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { ToastContainer,toast } from "react-toastify";
-const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
+const RecordsTab = ({ records, isSignedIn, contractId, wallet,isViewer }) => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [condition, setCondition] = useState(""); // Add this line
   const [recordData, setRecordData] = useState(""); // Add this line
@@ -149,9 +149,13 @@ const RecordsTab = ({ records, isSignedIn, contractId, wallet }) => {
         <Loading />
       ) : (
         <div>
-          <button className="upload-button" onClick={handleUploadClick}>
+          {
+            !isViewer && 
+            <button className="upload-button" onClick={handleUploadClick}>
             Upload Medical Records
           </button>
+          }
+          
           {showUploadModal && (
             <div className="upload-modal">
               <div className="upload-form">

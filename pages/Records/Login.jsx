@@ -1,18 +1,27 @@
 // src/components/Login.js
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import app from "../../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithPopup, GoogleAuthProvider, getRedirectResult } from "firebase/auth";
-import {auth} from "../../Firebase/firebase";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  getRedirectResult,
+} from "firebase/auth";
+import { auth } from "../../Firebase/firebase";
 import "../../assets/css/RecordsLogin.css";
 import logoImage from "../../assets/MediBridge_logo.png";
+import MyContext from "../../Context/MyContext";
+import PatientRecordView from "./PatientRecordView";
 const auth = getAuth();
 const Login = () => {
   const navigate = useNavigate();
   const [showText, setShowText] = useState(false);
-
+  const [showSignIn, setshowSignIn] = useState(true);
   useEffect(() => {
+    if(localStorage.getItem("googleData"))
+    setshowSignIn(false);
     const typingTimeout = setTimeout(() => {
       setShowText(true);
     }, 1000);
@@ -21,21 +30,20 @@ const Login = () => {
     };
   }, []);
 
-  
   const handleGoogleSignIn = async (e) => {
     e.preventDefault();
-    const provider =  new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider();
     try {
-       signInWithPopup(auth, provider)
+      signInWithPopup(auth, provider)
         .then((result) => {
           // This gives you a Google Access Token. You can use it to access the Google API.
           const credential = GoogleAuthProvider.credentialFromResult(result);
           const token = credential.accessToken;
           // The signed-in user info.
           const user = result.user;
-          console.log(user);
+          console.log(user.email);
+          localStorage.setItem("googleData", JSON.stringify(user.email));
           // IdP data available using getAdditionalUserInfo(result)
-          navigate("/patientdata");
           // ...
         })
         .catch((error) => {
@@ -54,18 +62,23 @@ const Login = () => {
     }
   };
 
+  if (showSignIn) {
+    return (
+      <div className="login-container-google">
+        {showText && (
+          <h1 className="typing-animation">Hello •‿• , Please Sign-In...</h1>
+        )}
+        <img src={logoImage} alt="Logo" className="logo" />
+        <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+      </div>
+    );
+  }
+  else{
+    return(
+      <PatientRecordView />
+    )
   
-  return (
-    <div className="login-container-google">
-      {showText && (
-        <h1 className="typing-animation">
-          Hello  •‿• , Please Sign-In...
-        </h1>
-      )}
-      <img src={logoImage} alt="Logo" className="logo" />
-      <button onClick={handleGoogleSignIn}>Sign in with Google</button>
-    </div>
-  );
+  }
 };
 
 export default Login;

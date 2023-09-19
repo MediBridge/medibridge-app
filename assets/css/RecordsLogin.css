@@ -52,4 +52,20 @@
 .login-container-google button:hover {
       background-color: #66c2e0;
     }
-  
+
+  .accountAddressInput{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 10vh;
+    align-items: center;
+  }
+  .accountAddressInput label{
+    font-size: 24px;
+  }
+  .accountAddressInput input{
+    width: 30%;
+    height: 3vh;
+  }

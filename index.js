@@ -32,19 +32,7 @@ try {
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Routes>
-<Route
-      {...rest}
-      render={(props) =>
-        auth().currentUser ? <Component {...props} /> : <Redirect to="/login" />
-      }
-    />
-    </Routes>
-    
-  );
-};
+
 // Setup on page load
 window.onload = async () => {
   const isSignedIn = await wallet.startUp();
@@ -74,7 +62,7 @@ window.onload = async () => {
     },
     {
       path:"/patientdata",
-      element:<PrivateRoute component={PatientRecordView} />
+      element:<PatientRecordView   isSignedIn={isSignedIn} contractId={CONTRACT_ADDRESS} wallet={wallet} isAPatient={isAPatient}/>
     },
     {
       path: "/patient",

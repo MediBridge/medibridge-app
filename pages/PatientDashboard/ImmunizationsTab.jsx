@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-const ImmunizationsTab = () => {
+const ImmunizationsTab = ({immunizations, isViewer}) => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [vaccine, setVaccine] = useState("");
   const [date, setDate] = useState("");
   const [provider, setProvider] = useState("");
   const [uploadStatus, setUploadStatus] = useState("");
-  const [immunizations, setImmunizations] = useState([
+  const [immunizationsData, setImmunizations] = useState([
     // Mock immunization data
     {
       vaccine: "COVID-19 Vaccine",
@@ -45,15 +45,17 @@ const ImmunizationsTab = () => {
     setUploadStatus("Immunization record uploaded successfully.");
 
     // Add the new immunization data to the table
-    setImmunizations([...immunizations, newImmunization]);
+    setImmunizations([...immunizationsData, newImmunization]);
   };
 
   return (
     <div>
       <div>
-        <button className="upload-button" onClick={handleUploadClick}>
-          Upload Immunization Record
-        </button>
+        {!isViewer && (
+          <button className="upload-button" onClick={handleUploadClick}>
+            Upload Immunization Record
+          </button>
+        )}
         {showUploadModal && (
           <div className="upload-modal">
             <div className="upload-form">
@@ -104,7 +106,7 @@ const ImmunizationsTab = () => {
             </tr>
           </thead>
           <tbody>
-            {immunizations.map((immunization, index) => (
+            {immunizationsData.map((immunization, index) => (
               <tr className="immunization-row" key={index}>
                 <td>{immunization.vaccine}</td>
                 <td>{immunization.date}</td>
